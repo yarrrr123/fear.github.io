@@ -5,6 +5,13 @@
     <title>Ikisty | Profile</title>
     <link rel="icon" href="picture1.png">
     <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         /* Основные переменные */
         :root {
             --glass-bg: rgba(255, 255, 255, 0.1);
@@ -13,18 +20,35 @@
             --icon-color: #ff6b6b;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         html, body {
             width: 100%;
             height: 100%;
-            background: url('background.gif') no-repeat center center fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Обертка для фона */
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .background-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('background.gif') no-repeat center center;
             background-size: cover;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Основной контейнер */
@@ -40,12 +64,23 @@
         /* Глассморфизм панель */
         .glass-panel {
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(30px);
             border-radius: 40px;
             padding: 60px 80px;
             margin: 20px;
-            box-shadow: 0 35px 75px rgba(0, 0, 0, 0.3),
-                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.4),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Стиль для скролла (если нужно) */
+        .scrollbar-hide {
+            scrollbar-width: none;
+            scrollbar-height: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
 
         /* Заголовок сайта */
@@ -57,19 +92,22 @@
             color: var(--text-color);
             font-size: clamp(24px, 5vw, 36px);
             font-weight: 700;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* Аватарка */
         .avatar {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             background: url('avatar.png') no-repeat center center;
             background-size: cover;
             border-radius: 50%;
             margin-bottom: 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-                        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
         /* Никнейм */
@@ -78,7 +116,9 @@
             font-size: clamp(18px, 3vw, 24px);
             text-align: center;
             margin-bottom: 30px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.3),
+                0 0 5px rgba(255, 255, 255, 0.5);
         }
 
         /* Список приложений */
@@ -96,11 +136,19 @@
             padding: 25px;
             min-width: 200px;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .app-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.2),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
         }
 
         .app-icon {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             background: var(--icon-color);
             border-radius: 50%;
             display: flex;
@@ -109,12 +157,20 @@
             margin-bottom: 15px;
             color: #fff;
             font-size: clamp(24px, 3vw, 36px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .app-name {
             color: var(--text-color);
             font-size: clamp(14px, 2vw, 18px);
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            text-shadow: 
+                0 1px 5px rgba(0, 0, 0, 0.3),
+                0 0 2px rgba(255, 255, 255, 0.5);
         }
 
         /* Медиа запросы */
@@ -124,8 +180,8 @@
             }
             
             .avatar {
-                width: 130px;
-                height: 130px;
+                width: 140px;
+                height: 140px;
             }
             
             .apps-container {
@@ -133,9 +189,22 @@
                 align-items: center;
             }
         }
+
+        @media (max-width: 480px) {
+            .site-title {
+                font-size: clamp(20px, 3vw, 26px);
+            }
+            
+            .nickname {
+                font-size: clamp(14px, 2vw, 18px);
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Фон -->
+    <div class="background-wrapper"></div>
+    
     <div class="container">
         <!-- Заголовок сайта -->
         <h1 class="site-title">Ikisty | Profile</h1>
