@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ikisty | Profile</title>
+    <link rel="icon" href="picture1.png">
+    <style>
+        /* Основные переменные */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-backdrop: rgba(255, 255, 255, 0.3);
+            --text-color: #fff;
+            --icon-color: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: url('background.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Основной контейнер */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Глассморфизм панель */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 40px;
+            padding: 60px 80px;
+            margin: 20px;
+            box-shadow: 0 35px 75px rgba(0, 0, 0, 0.3),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Заголовок сайта */
+        .site-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-color);
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 700;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Аватарка */
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: url('avatar.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Никнейм */
+        .nickname {
+            color: var(--text-color);
+            font-size: clamp(18px, 3vw, 24px);
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Список приложений */
+        .apps-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .app-item {
+            background: var(--glass-backdrop);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--icon-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: #fff;
+            font-size: clamp(24px, 3vw, 36px);
+        }
+
+        .app-name {
+            color: var(--text-color);
+            font-size: clamp(14px, 2vw, 18px);
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Медиа запросы */
+        @media (max-width: 768px) {
+            .glass-panel {
+                padding: 40px 60px;
+            }
+            
+            .avatar {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .apps-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Заголовок сайта -->
+        <h1 class="site-title">Ikisty | Profile</h1>
+        
+        <!-- Основная панель -->
+        <div class="glass-panel">
+            <!-- Аватарка -->
+            <div class="avatar"></div>
+            
+            <!-- Никнейм -->
+            <p class="nickname">ikisty</p>
+            
+            <!-- Список приложений -->
+            <div class="apps-container">
+                <div class="app-item">
+                    <div class="app-icon">1️⃣</div>
+                    <div class="app-name">Project Alpha</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon">2️⃣</div>
+                    <div class="app-name">Design Studio</div>
+                </div>
+                <div class="app-item">
+                    <div class="app-icon">3️⃣</div>
+                    <div class="app-name">Data Analyzer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
